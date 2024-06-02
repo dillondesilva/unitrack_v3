@@ -4,12 +4,14 @@ import "./units.css";
 
 function Units() {
     const [isFilterVisible, setIsFilterVisible] = useState(false);
+    const [queryValue, setQueryValue] = useState("");
 
     const toggleFilter = () => {
         setIsFilterVisible(!isFilterVisible);
     };
 
-    const handleInputChange = () => {
+    const handleInputChange = (event) => {
+        setQueryValue(event.target.value);
         setIsFilterVisible(false);
     };
 
@@ -27,7 +29,7 @@ function Units() {
                     <span className="material-icons icon" id="search"> search </span>
                     <label className="inputLabel">
                         <p>Search Unit Code </p>
-                        <input className="unitSearchInput" type='text' placeholder="" name="search" id="unitSearch" onChange={handleInputChange} />
+                        <input value={queryValue} className="unitSearchInput" type='text' placeholder="" name="search" id="unitSearch" onChange={handleInputChange}/>
                     </label>
                     <span className="material-icons icon" id="filter" onClick={toggleFilter}> tune </span>
                 </div>
