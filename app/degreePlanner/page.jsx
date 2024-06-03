@@ -22,6 +22,19 @@ function DegreePlanner() {
                         </select>
                     </div>
                     <div className="formElement">
+                        <label className="degreeLabel" htmlFor="firstMajor">Degree year</label>
+                        <div className="degreeDateGroup">
+                            <input type="text" placeholder="Start year" className="degreeDateInput" htmlFor="degreeStart" 
+                                onFocus={(ctx) => (ctx.target.type='month')}
+                                onBlur={(ctx) => (ctx.target.type='text')}
+                            />
+                            <input type="text" placeholder="Finish year" className="degreeDateInput" htmlFor="degreeStart" 
+                                onFocus={(ctx) => (ctx.target.type='month')}
+                                onBlur={(ctx) => (ctx.target.type='text')}
+                            />
+                        </div>
+                    </div>
+                    <div className="formElement">
                         <label className="degreeLabel" htmlFor="firstMajor">Major</label>
                         <select id="firstMajor" className="degreeSelect" required>
                             <option value="" disabled selected>Select major</option>
