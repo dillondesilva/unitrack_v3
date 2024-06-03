@@ -1,10 +1,25 @@
 "use client"
 import "./degreePlanner.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Planner } from "./planner";
 
 function DegreePlanner() {
     const [shouldShowNextPage, setShouldShowNextPage] = useState(false);
+    const [degreeStartYears, setDegreeStartYears] = useState([]);
+
+    
+    useEffect(() => {
+        const currYear = new Date().getFullYear();
+        let validDegreeStartYears = [];
+        let lowerBoundYear = currYear - 5;
+        let upperBoundYear = currYear + 1;
+
+        for (let year=lowerBoundYear; year < upperBoundYear; year++) {
+            validDegreeStartYears.push(year);
+        }
+
+        setDegreeStartYears(validDegreeStartYears);
+    }, []);
 
     return (
         <>
@@ -24,14 +39,27 @@ function DegreePlanner() {
                     <div className="formElement">
                         <label className="degreeLabel" htmlFor="firstMajor">Degree year</label>
                         <div className="degreeDateGroup">
-                            <input type="text" placeholder="Start year" className="degreeDateInput" htmlFor="degreeStart" 
-                                onFocus={(ctx) => (ctx.target.type='month')}
+                            {/* <input type="text" placeholder="Start year" className="degreeDateInput" htmlFor="degreeStart" 
+                                min="2017"
+                                max="2026"
+                                onFocus={(ctx) => (ctx.target.type='number')}
                                 onBlur={(ctx) => (ctx.target.type='text')}
-                            />
-                            <input type="text" placeholder="Finish year" className="degreeDateInput" htmlFor="degreeStart" 
-                                onFocus={(ctx) => (ctx.target.type='month')}
-                                onBlur={(ctx) => (ctx.target.type='text')}
-                            />
+                            /> */}
+                            <select id="degreeStart" className="degreeSelect" required>
+                                <option value="" disabled selected>Select start year</option>
+                                {
+                                    degreeStartYears.map((validYearOption, idxInValidYears) => {
+                                        return (
+                                            <option 
+                                                key={validYearOption} 
+                                                value={idxInValidYears}
+                                            >
+                                                {validYearOption}
+                                            </option>
+                                        )
+                                    })
+                                }
+                            </select>
                         </div>
                     </div>
                     <div className="formElement">
